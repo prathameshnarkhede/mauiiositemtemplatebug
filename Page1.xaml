@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MauiApp1"
+             x:Class="MauiApp1.Page1">
+    <ContentPage.Resources>
+        <DataTemplate x:Key="ItemTemplateOne">
+            <TextCell Text="{Binding Name}" TextColor="BlueViolet" />
+        </DataTemplate>
+        <DataTemplate x:Key="ItemTemplateTwo">
+            <TextCell Text="{Binding Name}" TextColor="Red" />
+        </DataTemplate>
+    </ContentPage.Resources>
+    <StackLayout>
+        <local:CustomListView x:Name="MyCustomListView">
+            <local:CustomListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Label Text="{Binding Name}" />
+                    </ViewCell>
+                </DataTemplate>
+            </local:CustomListView.ItemTemplate>
+            <local:CustomListView.ControlTemplate>
+                <ControlTemplate>
+                    <ListView x:Name="PresentingView" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                        <x:Arguments>
+                            <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+                        </x:Arguments>
+                    </ListView>
+                </ControlTemplate>
+            </local:CustomListView.ControlTemplate>
+        </local:CustomListView>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Text="Blue" Clicked="Blue_Foreground_Clicked" />
+            <Button Grid.Column="1" Text="Red" Clicked="Red_Foreground_Clicked" />
+        </Grid>
+    </StackLayout>
+</ContentPage>
